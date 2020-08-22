@@ -13,7 +13,6 @@ class Solution:
                 nums[flag] = num
                 flag += 1
         return flag
-            
 
 
 # 既然问题要求我们就地删除给定值的所有元素，我们就必须用O(1) 的额外空间来处理它。如何解决？我们可以保留两个指针 i 和 j，其中 i 是慢指针，jj是快指针。

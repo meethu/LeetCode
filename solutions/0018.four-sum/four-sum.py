@@ -32,15 +32,15 @@ class Solution():
         res = []
         for i in range(length - 3):
             for j in range(i + 1, length - 2):
-                l, r, t = j + 1, length - 1, target - nums[i] - nums[j]
-                while l < r:
-                    if t > nums[l] + nums[r]:
-                        l += 1
-                    elif t < nums[l] + nums[r]:
-                        r -= 1
-                    elif t == nums[l] + nums[r]:
-                        res.append((nums[i], nums[j], nums[l], nums[r]))
-                    l += 1
+                left, right, sub = j + 1, length - 1, target - nums[i] - nums[j]
+                while left < right:
+                    if sub > nums[left] + nums[right]:
+                        left += 1
+                    elif sub < nums[left] + nums[right]:
+                        right -= 1
+                    elif sub == nums[left] + nums[right]:
+                        res.append((nums[i], nums[j], nums[left], nums[right]))
+                    left += 1
         return list(set(res))
 
 

@@ -11,7 +11,6 @@ class Solution:
                     break
         return dp[-1]
 
-
 # from typing import List
 #
 #
@@ -55,5 +54,3 @@ class Solution:
 #     solution = Solution()
 #     res = solution.wordBreak(s, wordDict)
 #     print(res)
-
-

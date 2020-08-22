@@ -16,13 +16,14 @@ class Solution:
         res = ""
         if not strs:
             return ""
-        ss = map(set, zip(*strs)) # 去重
+        ss = map(set, zip(*strs))  # 去重
         for i, x in enumerate(ss):
             x = list(x)
             if len(x) > 1:
                 break
             res = res + x[0]
         return res
+
 
 # 利用python的max()和min()，在Python里字符串是可以比较
 # 按照ascII值排，举例abb， aba，abac，最大为abb，最小为aba。

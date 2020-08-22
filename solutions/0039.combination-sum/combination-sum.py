@@ -1,20 +1,23 @@
 class Solution:
-    def combinationSum(self, candidates, target):
-        self.result, temp, index = [], [], 0
-        candidates.sort()
-        self.findres(candidates, target, index, temp)
-        return self.result
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
 
-    def findres(self, candidates, target, index, temp):
-        if target < 0:
-            return
-        if target == 0:
-            self.result.append(temp)
-            return
-        for i in range(index, len(candidates)):
-            self.findres(candidates, target - candidates[i], i, temp + [candidates[i]])
+        ret = []
+        def backtrack(target, idx, tmp):
+            if target == 0:
+                ret.append(tmp[:])
+                return
 
+            for i in range(idx, len(candidates)):
+                if target < candidates[i]:
+                    break
+                tmp.append(candidates[i])
+                # 可重复使用，所以下次开始位置可以包含在内
+                backtrack(target - candidates[i], i, tmp)
+                tmp.pop()
 
+        backtrack(target, 0, [])
+
+        return ret
 # 下面代码有 4个 0，对应的路径是 [[2, 2, 3], [2, 3, 2], [3, 2, 2], [7]]，而示例中的解集只有 [[7], [2, 2, 3]]，
 # 结果集出现了重复。重复的原因是后面分支的更深层的边出现了前面分支低层的边的值。
 # 把候选数组排个序，后面选取的数不能比前面选的数还要小，

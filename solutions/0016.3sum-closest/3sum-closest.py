@@ -1,6 +1,5 @@
 # 标签：排序和双指针
-# 本题目因为要计算三个数，如果靠暴力枚举的话时间复杂度会到 O(n^3）
-#  )，需要降低时间复杂度
+# 本题目因为要计算三个数，如果靠暴力枚举的话时间复杂度会到 O(n^3），需要降低时间复杂度
 # 首先进行数组排序，时间复杂度 O(nlogn)
 # 在数组 nums 中，进行遍历，每遍历一个值利用其下标i，形成一个固定值 nums[i]
 # 再使用前指针指向 start = i + 1 处，后指针指向 end = nums.length - 1 处，也就是结尾处
@@ -17,14 +16,12 @@ class Solution:
         if length < 3:
             return
         nums.sort()
-        curr_min = 0
+        curr_min = float('inf')
         for i in range(length):
             left, right = i + 1, length - 1
             while left < right:
                 three_sum = nums[i] + nums[left] + nums[right]
                 x = abs(target - three_sum)
-                if curr_min == 0:
-                    curr_min = x
                 if x <= curr_min:
                     curr_min = x
                     sum_min = three_sum

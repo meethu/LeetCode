@@ -1,75 +1,37 @@
-# python3 用回溯递归的方法去试探每一种可能性 对于一个字符串s，有len(s)种方法把它分成左右两个部分（分割方法看代码），假如左侧的不是回文，则舍弃这次尝试；假如左侧的是回文串，则把右侧的进行递归的分割，并返回右侧的分割的所有情况
-
-
-# 解法一 分治
-# 将大问题分解为小问题，利用小问题的结果，解决当前大问题。
-
-# 这道题的话，举个例子。
-
-# aabb
-# 先考虑在第 1 个位置切割，a | abb
-# 这样我们只需要知道 abb 的所有结果，然后在所有结果的头部把 a 加入
-# abb 的所有结果就是 [a b b] [a bb]
-# 每个结果头部加入 a，就是 [a a b b] [a a bb]
-
-# aabb
-# 再考虑在第 2 个位置切割，aa | bb
-# 这样我们只需要知道 bb 的所有结果，然后在所有结果的头部把 aa 加入
-# bb 的所有结果就是 [b b] [bb]
-# 每个结果头部加入 aa,就是 [aa b b] [aa bb]
-
-# aabb
-# 再考虑在第 3 个位置切割，aab|b
-# 因为 aab 不是回文串，所有直接跳过
-
-# aabb
-# 再考虑在第 4 个位置切割，aabb |
-# 因为 aabb 不是回文串，所有直接跳过
-
-# 最后所有的结果就是所有的加起来
-# [a a b b] [a a bb] [aa b b] [aa bb]
-
-# 作者：windliang
-# 链接：https://leetcode-cn.com/problems/palindrome-partitioning/solution/xiang-xi-tong-su-de-si-lu-fen-xi-duo-jie-fa-by-3-7/
-# 来源：力扣（LeetCode）
-# 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-
-# class Solution(object):
-#     def partition(self, s):
-#         """
-#         :type s: str
-#         :rtype: List[List[str]]
-#         """
-#         if len(s) == 0:
-#             return [[]]
-#         if len(s) == 1:
-#             return [[s]]
-#         tmp = []
-#         for i in range(1,len(s)+1):
-#             left = s[:i]
-#             right = s[i:]
-#             if left ==left[::-1]: #如果左侧不是回文的，则舍弃这种尝试
-#                 right = self.partition(right)
-#                 for i in range(len(right)):
-#                     tmp.append([left]+right[i])
-#         return tmp
-        
-        
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
-        res=[]
-        def backtrack(List,tmp):
+        ret = []
+
+        def backtrack(s, idx, tmp):
+            if idx == len(s):
+                ret.append(tmp[:])
+                return
+
+            for i in range(idx, len(s)):
+                if s[idx:i + 1] == s[idx:i + 1][::-1]:
+                    tmp.append(s[idx:i + 1])
+                    backtrack(s, i + 1, tmp)
+                    tmp.pop()
+
+        backtrack(s, 0, [])
+
+        return ret
+
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        res = []
+
+        def backtrack(List, tmp):
             if not List:
                 res.append(tmp)
                 return
             for i in range(len(List)):
-                if List[:i+1]==List[i::-1]:
-                    backtrack(List[i+1:],tmp+[List[:i+1]])
-        backtrack(s,[])
+                if List[:i + 1] == List[i::-1]:
+                    backtrack(List[i + 1:], tmp + [List[:i + 1]])
+
+        backtrack(s, [])
         return res
-
-
-
 
 # python3回溯算法，时间76%，空间98%
 
@@ -97,26 +59,3 @@ class Solution:
 #         tmp,res = [],[]
 #         dfs(s, tmp, res)
 #         return res
-
-
-# python3 用回溯递归的方法去试探每一种可能性 对于一个字符串s，有len(s)种方法把它分成左右两个部分（分割方法看代码），假如左侧的不是回文，则舍弃这次尝试；假如左侧的是回文串，则把右侧的进行递归的分割，并返回右侧的分割的所有情况
-
-# class Solution(object):
-#     def partition(self, s):
-#         """
-#         :type s: str
-#         :rtype: List[List[str]]
-#         """
-#         if len(s) == 0:
-#             return [[]]
-#         if len(s) == 1:
-#             return [[s]]
-#         tmp = []
-#         for i in range(1,len(s)+1):
-#             left = s[:i]
-#             right = s[i:]
-#             if left ==left[::-1]: #如果左侧不是回文的，则舍弃这种尝试
-#                 right = self.partition(right)
-#                 for i in range(len(right)):
-#                     tmp.append([left]+right[i])
-#         return tmp

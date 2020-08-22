@@ -4,7 +4,7 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         max_sum, tmp = nums[0], nums[0]
         for i in range(1, len(nums)):
-            tmp = max(tmp + nums[i], nums[i]) # 递推关系f(n) = max(f(n-1) + A[n], A[n]);
+            tmp = max(tmp + nums[i], nums[i])  # 递推关系f(n) = max(f(n-1) + A[n], A[n]);
             max_sum = max(max_sum, tmp)
         return max_sum
 

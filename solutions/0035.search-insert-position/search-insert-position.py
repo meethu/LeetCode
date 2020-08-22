@@ -31,6 +31,5 @@ class Solution:
             if nums[mid] < target:
                 left = mid + 1
             else:
-                assert nums[mid] >= target
                 right = mid
         return left

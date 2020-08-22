@@ -27,6 +27,57 @@ class Solution:
 #         backtrack(nums, [])
 #         return res
 
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+
+        ret = []
+        visited = [False] * len(nums)
+
+        def backtrack(nums, tmp):
+
+            if len(tmp) == len(nums):
+                ret.append(tmp[:])
+                return
+
+            for i in range(len(nums)):
+                if visited[i]:
+                    continue
+                tmp.append(nums[i])
+                visited[i] = True
+                backtrack(nums, tmp)
+                visited[i] = False
+                tmp.pop()
+
+        backtrack(nums, [])
+
+        return ret
+
+
+# https://leetcode-cn.com/problems/permutations/solution/xiong-mao-shua-ti-python3-di-gui-qiu-jie-8xing-by-/
+
+
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+
+        ret = []
+
+        def backtrack(nums, tmp):
+
+            if len(tmp) == len(nums):
+                ret.append(tmp[:])
+                return
+
+            for i in range(len(nums)):
+                if nums[i] in tmp:
+                    continue
+                tmp.append(nums[i])
+                backtrack(nums, tmp)
+                tmp.pop()
+
+        backtrack(nums, [])
+
+        return ret
+
 
 nums = [1, 2, 3]
 problems = Solution()

@@ -24,23 +24,14 @@ class TreeNode:
 
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> TreeNode:
-        self.index_map = {val: idx for idx, val in enumerate(inorder)}
-        self.postidx = -1
-        self.inorder = inorder
-        self.postorder = postorder
-        return self.helper(0, len(inorder))
-
-    def helper(self, in_left, in_right):
-        if in_left == in_right:
+        if len(inorder) == 0:
             return None
 
-        root = TreeNode(self.postorder[self.postidx])
+        idx_map = {val:idx for idx, val in enumerate(inorder)}
+        root = TreeNode(postorder.pop())
+        idx = idx_map[root.val]
 
-        location = self.index_map[self.postorder[self.postidx]]
-
-        self.postidx -= 1
-
-        root.right = self.helper(location + 1, in_right)
-        root.left = self.helper(in_left, location)
+        root.right = self.buildTree(inorder[idx+1:], postorder)
+        root.left = self.buildTree(inorder[:idx], postorder)
 
         return root

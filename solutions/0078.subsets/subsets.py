@@ -1,18 +1,18 @@
 class Solution:
-    def __init__(self):
-        self.result = []
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ret = []
 
-    def subsets(self, nums):
-        return self.helper(nums, 0, [])
+        def backtrack(nums, idx, tmp):
+            # if idx > len(nums):
+            #     return
+            ret.append(tmp[:])
+            for i in range(idx, len(nums)):
+                tmp.append(nums[i])
+                backtrack(nums, i + 1, tmp)
+                tmp.pop()
 
-    def helper(self, nums, index, temp):
-        if index == len(nums):
-            self.result.append(temp)
-            return
-        self.result.append(temp)
-        for i in range(index, len(nums)):
-            self.helper(nums, i + 1, temp + [nums[i]])
-        return self.result
+        backtrack(nums, 0, [])
+        return ret
 
 
 # 思路一：库函数

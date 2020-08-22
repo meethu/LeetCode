@@ -1,9 +1,9 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 # 首先判断 p 和 q 是不是 None，然后判断它们的值是否相等。
 # 若以上判断通过，则递归对子结点做同样操作。

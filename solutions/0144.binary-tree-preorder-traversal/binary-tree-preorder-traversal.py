@@ -12,6 +12,22 @@ class Solution:
         else:
             return [root.val] + self.preorderTraversal(root.left) + self.preorderTraversal(root.right)
 
+
+class Solution:
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+
+        stack, ret = [], []
+
+        while root or stack:
+            while root:
+                ret.append(root.val)
+                stack.append(root)
+                root = root.left
+
+            node = stack.pop()
+            root = node.right
+        return ret
+
 # class Solution:
 #     def preorderTraversal(self, root: TreeNode) -> List[int]:
 #         res = []

@@ -1,10 +1,9 @@
 # Definition for a binary tree node.
-# class TreeNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
+class TreeNode:
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
 
 
 # 平衡二叉搜索树的特点是：每个节点的左右子树都高度差在1以内，每个节点左子树小于右子树。
@@ -26,8 +25,8 @@ class Solution:
         if not nums:
             return None
         else:
-            mid= length//2
-            tn=TreeNode(nums[mid])
-            tn.left=self.sortedArrayToBST(nums[0:mid])
-            tn.right=self.sortedArrayToBST(nums[mid+1:length])
+            mid = length // 2
+            tn = TreeNode(nums[mid])
+            tn.left = self.sortedArrayToBST(nums[0:mid])
+            tn.right = self.sortedArrayToBST(nums[mid + 1:length])
         return tn

@@ -6,6 +6,12 @@ class Solution:
         s = re.findall("\w", s)
         return s == s[::-1]
 
+
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        sgood = "".join(ch.lower() for ch in s if ch.isalnum())
+        return sgood == sgood[::-1]
+
 # class Solution:
 #     def isPalindrome(self, s):
 #         """

@@ -16,6 +16,7 @@ class Solution:
             self.helper(now + '0', 1, n)
         return self.result
 
+
 if __name__ == '__main__':
     n = 2
     print(Solution().grayCode(n))

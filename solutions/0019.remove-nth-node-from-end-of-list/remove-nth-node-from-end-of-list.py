@@ -39,7 +39,7 @@ class Solution:
         while n:  # 先让 fast 指针走n步
             fast = fast.next
             n -= 1
-        while fast.next:
+        while fast and fast.next:
             fast = fast.next
             slow = slow.next
         slow.next = slow.next.next

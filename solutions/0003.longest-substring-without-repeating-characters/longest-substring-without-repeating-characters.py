@@ -36,7 +36,7 @@ class Solution:
         ignoreIndex, result = -1, 0
         for idx, v in enumerate(s):
             # 如果这个字符在字典中，那么就把之前的下标存到 ignoreIndex 中，将对应字符的 value 变更为新的下标
-            if v in dic:
+            if v in dic and dic[v] > ignoreIndex:
                 ignoreIndex = dic[v] # 如果val恰好在tmp字典，那么直接返回忽略的下标
                 dic[v] = idx # 如果val恰好在tmp字典，那么直接返回忽略的下标
             else:

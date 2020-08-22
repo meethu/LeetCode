@@ -5,6 +5,37 @@
 #         self.left = None
 #         self.right = None
 
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+from collections import deque
+class Solution:
+    def levelOrder(self, root: TreeNode) -> List[List[int]]:
+        ret = []
+
+        if not root:
+            return []
+
+        queue = deque([root])
+        while queue:
+            size = len(queue)
+            tmp = []
+
+            for _ in range(size):
+                node = queue.popleft()
+                tmp.append(node.val)
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+            ret.append(tmp)
+
+        return ret
+
 
 # 最简单的解法就是递归，首先确认树非空，然后调用递归函数 helper(node, level)，参数是当前节点和节点的层次。程序过程如下：
 
@@ -56,46 +87,22 @@
 
 
 # 迭代
-class Solution:
-    def levelOrder(self, root: TreeNode) -> List[List[int]]:
-        if root is None:
-            return []
-        queue = collections.deque()
-        queue.append(root)
-        result = []
-        while queue:
-            level_size = len(queue)
-            current_level = []  # 该轮循环的结果集
-            for _ in range(level_size):  # 把该次queue里的数据循环一下,作为当前层的结果添加到 current_level
-                node = queue.popleft()
-                current_level.append(node.val)
-                if node.left:
-                    queue.append(node.left)  # 判断当前的数据有没有子节点,有就加到node里
-                if node.right:
-                    queue.append(node.right)
-            result.append(current_level)  # 重提示超时 我说怎么会超时呢!
-        return result
-
-# # # 迭代
 # class Solution:
 #     def levelOrder(self, root: TreeNode) -> List[List[int]]:
 #         if root is None:
 #             return []
-#         queue = [root]                       #把root初始化一下进去
-#         out = []
+#         queue = collections.deque()
+#         queue.append(root)
+#         result = []
 #         while queue:
-#             child = []                       #该轮循环的结果集
-#             node = []                        #存放while下一次的 数据集
-#             for item in queue:               #把该次queue里的数据循环一下 添加到 child
-#                 child.append(item.val)
-#                 if item.left:
-#                     node.append(item.left)   #判断当前的数据有没有子节点,有就加到node里
-#                 if item.right:
-#                     node.append(item.right)
-#             out.append(child)                #把while这次的结果集放到输出数组里
-#             queue = node                     #重要! 这是把 node里 搜集的该次循环节点的子节点 放到 queue里 之前漏写这一步就提示超时 我说怎么会超时呢!
-#         return out
-# 作者：ma-wen-bo
-# 链接：https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/python3-bfsjian-ming-shi-xian-ceng-ci-bian-li-by-m/
-
-
+#             level_size = len(queue)
+#             current_level = []  # 该轮循环的结果集
+#             for _ in range(level_size):  # 把该次queue里的数据循环一下,作为当前层的结果添加到 current_level
+#                 node = queue.popleft()
+#                 current_level.append(node.val)
+#                 if node.left:
+#                     queue.append(node.left)  # 判断当前的数据有没有子节点,有就加到node里
+#                 if node.right:
+#                     queue.append(node.right)
+#             result.append(current_level)  # 重提示超时 我说怎么会超时呢!
+#         return result
